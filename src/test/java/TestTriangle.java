@@ -9,27 +9,16 @@ public class TestTriangle {
    private Triangle triangle;
 
     @Test(expected = TriangleMinimumSideException.class)
-    public void testTryTriangleSideEqualsZero () throws Exception{
+    public void testIsNotTriangle () throws TriangleMinimumSideException {
 
         int sideA = 0;
         int sideB = 10;
         int sideC = 12;
+        String message = "Each side should be greater than 5.";
 
         triangle = new Triangle(sideA, sideB, sideC);
+        assertEquals(message, triangle.verifyTriangleType());
 
-        assertTrue(triangle.isEquilateral());
-    }
-
-    @Test(expected = TriangleMinimumSideException.class)
-    public void testTryTriangleSideEqualsFive () throws Exception{
-
-        int sideA = 10;
-        int sideB = 10;
-        int sideC = 5;
-
-        triangle = new Triangle(sideA, sideB, sideC);
-
-        assertTrue(triangle.isEquilateral());
     }
 
    @Test

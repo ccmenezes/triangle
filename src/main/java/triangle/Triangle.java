@@ -15,62 +15,16 @@ public class Triangle {
     }
 
     public String verifyTriangleType() throws TriangleMinimumSideException {
-        
-            if(isEquilateral()) {
-                return EnumTriangle.EQUILATERAL.getTriangle();
-            }else if(isScalene()){
+        if((sideA + sideB > sideC) && (sideA + sideC > sideB) && (sideB + sideC > sideA)) {
+            if((sideA == sideB) && (sideA == sideC)) {
+               return EnumTriangle.EQUILATERAL.getTriangle();
+            } else if ((sideA == sideB) || (sideA == sideC) | (sideB == sideC)) {
+                return  EnumTriangle.ISOSCELES.getTriangle();
+            } else {
                 return EnumTriangle.SCALENE.getTriangle();
             }
-            else {
-                return EnumTriangle.ISOSCELES.getTriangle();
-            }
-    }
-
-    public boolean isEquilateral() throws TriangleMinimumSideException {
-        if(!verifyMinimum()) {
-            throw new TriangleMinimumSideException(message);
-        }
-
-        boolean equilateral = (sideA == sideB) && (sideA == sideC);
-        return equilateral;
-    }
-
-    public boolean isScalene() throws TriangleMinimumSideException {
-        if(!verifyMinimum()) {
-            throw new TriangleMinimumSideException(message);
-        }
-        boolean scalene = (sideA != sideB) && (sideA != sideC) && (sideB != sideC);
-        return scalene;
-    }
-
-    public boolean isIsosceles() throws TriangleMinimumSideException {
-        if(!verifyMinimum()) {
-            throw new TriangleMinimumSideException(message);
-        }
-
-        boolean condition1 = (sideA == sideB) ? true: false;
-        boolean condition2 = (sideA == sideC) ? true: false;
-        boolean condition3 = (sideB == sideC) ? true: false;
-
-        if(condition1) {
-            return true;
-        } else if (condition2) {
-            return true;
-        } else if (condition3) {
-            return true;
         } else {
-            return false;
+             throw new TriangleMinimumSideException(message);
         }
     }
-
-    private boolean verifyMinimum() {
-        int minimum = 6;
-
-        if (sideA >= minimum && sideB >= minimum && sideC >= minimum) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }
